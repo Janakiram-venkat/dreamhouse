@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3 BHK House — 500 Yards</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        --ink: #f4ede4;
+        --muted: #c9bfb2;
+        --glass: rgba(24, 20, 18, 0.55);
+        --accent: #ffb46b;
+      }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #1b1716; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      #app canvas { display: block; }
+      .title {
+        position: fixed; left: 20px; top: 16px; color: var(--ink); pointer-events: none;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 0 18px rgba(0, 0, 0, 0.35);
+      }
+      .title h1 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.2px; }
+      .title p { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+      .presets {
+        position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%);
+        display: flex; gap: 4px; padding: 5px; border-radius: 12px;
+        background: var(--glass); backdrop-filter: blur(10px); max-width: calc(100vw - 32px); overflow-x: auto;
+      }
+      .presets button {
+        border: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px;
+        padding: 7px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+      }
+      .presets button:hover { background: rgba(255, 255, 255, 0.08); }
+      .presets button.on { background: var(--accent); color: #2a1a0c; }
+      #loading {
+        position: fixed; inset: 0; display: grid; place-items: center; background: #1b1716; color: var(--ink);
+        transition: opacity 0.6s; z-index: 10;
+      }
+      #loading.done { opacity: 0; pointer-events: none; }
+      #loading .track { width: 220px; height: 3px; background: #3a322d; border-radius: 2px; overflow: hidden; margin-top: 12px; }
+      #bar { width: 0; height: 100%; background: var(--accent); transition: width 0.2s; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div class="title">
+      <h1>3 BHK House · 500 Yards</h1>
+      <p>Modern · Spacious · Green — drag to orbit, keys 1–7 for views</p>
+    </div>
+    <div class="presets"></div>
+    <div id="loading"><div><div>Building the house…</div><div class="track"><div id="bar"></div></div></div></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

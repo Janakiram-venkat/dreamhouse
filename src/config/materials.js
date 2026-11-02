@@ -1,0 +1,67 @@
+// PBR definitions — CLAUDE.md §6. tile = texture repeat size in metres (UVs are world-space metres).
+export const materialDefs = {
+  plaster: { color: '#F3E2C4', roughness: 0.92, tex: 'plaster', tile: 2.0, normalScale: 0.3, grade: { sat: 0.9, gain: 1.05, contrast: 0.4 }, poche: true },
+  plasterInterior: { color: '#F3EEE6', roughness: 0.9, poche: true },
+  plinth: { color: '#5A5652', roughness: 0.95, tex: 'plaster', tile: 1.0, normalScale: 0.8, poche: true },
+  stone: { color: '#EED3A8', roughness: 0.85, tex: 'stone', tile: 1.4, normalScale: 1.4, aoIntensity: 1.0, grade: { sat: 0.6, gain: 1.85 }, poche: true },
+  teak: { color: '#B07A4C', roughness: 0.55, tex: 'teak', tile: 1.0, normalScale: 0.4 },
+  teakPlanks: { color: '#B88356', roughness: 0.6, tex: 'planks', tile: 1.2, normalScale: 0.5 },
+  charcoalMetal: { color: '#232323', roughness: 0.45, metalness: 0.6 },
+  // SPEC-DEVIATION: thin transparent glass instead of transmission:1 — three's transmission pre-pass re-renders
+  // every opaque mesh (≈ +110 draw calls, 2x grass triangles). See NOTES.md.
+  glass: { physical: true, color: '#C9D6DB', roughness: 0.03, metalness: 0, opacity: 0.22, ior: 1.5 },
+  glassBalustrade: { physical: true, color: '#BFD9D4', roughness: 0.05, opacity: 0.2, ior: 1.5 },
+  frosted: { physical: true, color: '#E8E6E2', roughness: 0.6, opacity: 0.85, ior: 1.5 },
+  floorTileGF: { color: '#F1E6D4', roughness: 0.35, tex: 'floor', tile: 1.2, normalScale: 0.1 },
+  terraceTile: { color: '#C9C2B8', roughness: 0.8, tex: 'terrace', tile: 1.8, normalScale: 0.6 },
+  granite: { color: '#C4BDB3', roughness: 0.5, tex: 'granite', tile: 1.2, normalScale: 0.4 },
+  pavers: { color: '#9A958F', roughness: 0.9, tex: 'pavers', tile: 1.6, normalScale: 1.0, aoIntensity: 1.0 },
+  steppingStone: { color: '#BDB8B0', roughness: 0.85, tex: 'concrete', tile: 1.0, normalScale: 0.5 },
+  concrete: { color: '#A9A49D', roughness: 0.9, tex: 'concrete', tile: 2.0, normalScale: 0.5 },
+  grass: { color: '#6E8F45', roughness: 0.95, tex: 'grass', tile: 2.0, normalScale: 0.8, grade: { sat: 1.3, gain: 1.1 } },
+  soil: { color: '#6A5444', roughness: 1.0, tex: 'soil', tile: 1.5, normalScale: 1.0 },
+  asphalt: { color: '#8A8784', roughness: 0.9, tex: 'asphalt', tile: 3.0, normalScale: 0.6 },
+  gateSlat: { color: '#1E1E1E', roughness: 0.5, metalness: 0.5 },
+  white: { color: '#F4F2EE', roughness: 0.6, poche: true },
+  darkRecess: { color: '#2B2826', roughness: 0.95 },
+  wpcDoor: { color: '#D8CDBE', roughness: 0.55 },
+  // interiors
+  fabricBeige: { color: '#CDBFA8', roughness: 0.95, sheen: 0.4 },
+  fabricGrey: { color: '#8C8780', roughness: 0.95 },
+  cushion: { color: '#E8DFCF', roughness: 0.95 },
+  woodLight: { color: '#C49A6C', roughness: 0.5, tex: 'teak', tile: 0.8, normalScale: 0.2 },
+  woodDark: { color: '#6B4A31', roughness: 0.5, tex: 'teak', tile: 0.8, normalScale: 0.2 },
+  quartz: { color: '#EFEDE8', roughness: 0.2 },
+  rug: { color: '#B8A88E', roughness: 1.0 },
+  art: { color: '#B9744A', roughness: 0.8 },
+  bedding: { color: '#F2EEE8', roughness: 0.9 },
+  ceramic: { color: '#F7F7F5', roughness: 0.15 },
+  potCharcoal: { color: '#2E2E2E', roughness: 0.7, metalness: 0.1 },
+  // car
+  carPaint: { physical: true, color: '#08090B', roughness: 0.35, metalness: 0.25, clearcoat: 1, clearcoatRoughness: 0.06, envScale: 0.25 },
+  carGlass: { color: '#07090B', roughness: 0.04, metalness: 0.0, envScale: 0.3 },
+  tyre: { color: '#151515', roughness: 0.85 },
+  rim: { color: '#9A9A9A', roughness: 0.3, metalness: 1.0 },
+  chrome: { color: '#DDDDDD', roughness: 0.15, metalness: 1.0 },
+  plate: { color: '#E9E9E4', roughness: 0.5 },
+  trunk: { color: '#5B4636', roughness: 0.95 },
+  palmTrunk: { color: '#8A7A64', roughness: 0.95 },
+  neighbour: { color: '#CFC4B2', roughness: 0.9, tex: 'plaster', tile: 3.0, normalScale: 0.2, grade: { sat: 0.8, gain: 0.85, contrast: 0.3 } },
+};
+
+export const textureSets = {
+  plaster: ['diff', 'nor', 'rough'],
+  stone: ['diff', 'nor', 'rough', 'ao'],
+  teak: ['diff', 'nor', 'rough'],
+  planks: ['diff', 'nor', 'rough'],
+  pavers: ['diff', 'nor', 'rough', 'ao'],
+  granite: ['diff', 'nor', 'rough'],
+  concrete: ['diff', 'nor', 'rough'],
+  grass: ['diff', 'nor'],
+  soil: ['diff', 'nor'],
+  terrace: ['diff', 'nor', 'rough'],
+  floor: ['diff', 'nor', 'rough'],
+  asphalt: ['diff', 'nor', 'rough'],
+};
+
+export const EMISSIVE_WARM = '#FFB46B';
